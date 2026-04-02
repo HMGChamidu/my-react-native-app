@@ -2,7 +2,8 @@ import { Alert, Text, TouchableOpacity, View ,TextInput} from "react-native";
 import { useState } from "react";
 export default function Index() {
 
-  const[ text, setText] = useState("");
+  const[ username, setUsername] = useState("");
+   const[ password, setPassword] = useState("");
   return (
     <View
       style={{
@@ -15,15 +16,20 @@ export default function Index() {
 
       
 
-      <TextInput style={{borderWidth:1, width:200, padding:10, marginBottom:20,}} placeholder="Type Something..."onChangeText={(value)=>setText(value)}/>
-      <TouchableOpacity
-        onPress={() => Alert.alert("Clicked!")}
-        style={{ backgroundColor: "green", padding: 15, borderRadius: 15 ,marginBottom: 20,}}
+      <TextInput style={{borderWidth:1, width:200, padding:10, marginBottom:20,}} placeholder="Enter username..."onChangeText={(value)=>setUsername(value)}/>
+        <TextInput style={{borderWidth:1, width:200, padding:10, marginBottom:20,}} placeholder="Type Password here..." onChangeText={(value)=>setPassword(value)} secureTextEntry={true}/>
+      <TouchableOpacity onPress={() => {if(username ==="" || password===""){
+        Alert.alert("Error", "Please fill all fields");}else{
+          Alert.alert("Success", "Login succcessful!");}
+        
+      }}
+        style={{ backgroundColor: "darkred", padding: 15, borderRadius: 10 ,marginBottom: 20
+          ,}}
       >
-        <Text style={{color: 'white'}}>Show Text</Text>
+        <Text style={{color: 'white'}}>Login</Text>
       </TouchableOpacity>
 
-      <Text style={{fontSize:18}}> {text}</Text>
+      <Text style={{fontSize:18}}> {username}</Text>
     </View>
   );
 }
